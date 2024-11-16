@@ -1,0 +1,123 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(images/image_bg.jpg) no-repeat center center/cover;
+    color: #fff;
+}
+
+.nav-bar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+.main-section {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-message h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: black;
+}
+
+.journal-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.entries-column {
+    width: 30%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 20px;
+    height: auto;
+}
+
+.entries-column h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ff8c94;
+}
+
+.entries-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.entries-list li {
+    margin-bottom: 10px;
+}
+
+.entries-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.entries-list a:hover {
+    text-decoration: underline;
+}
+
+.entry-area {
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#entryTitle {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 4px;
+}
+
+#entryContent {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    resize: none;
+}
+
+button {
+    padding: 7px 12px;
+    background-color: #ff8c94;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 2%;;
+}
+
+button:hover {
+    background-color: #e07b81;
+}

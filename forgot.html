@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyJournal</title>
+    <link rel="stylesheet" href="assets/css/forgot_styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="forgot-password-container">
+        <div class="forgot-password-box">
+            <h2>Forgot Your Password?</h2>
+            <p>Enter your registered email address, and we'll send you instructions to reset your password.</p>
+            
+            <form action="assets/php/forgot.php" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit" class="reset-button">Send Reset Instructions</button>
+            </form>
+
+            <div class="links">
+                <a href="login.html">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
