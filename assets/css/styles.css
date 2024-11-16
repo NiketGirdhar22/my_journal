@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -12,6 +13,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-logo {
@@ -33,6 +35,22 @@ body {
     font-weight: 500;
 }
 
+/* Hamburger Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger div {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+
+/* Main Section */
 .main-section {
     display: flex;
     justify-content: center;
@@ -73,6 +91,7 @@ body {
     color: #fff;
 }
 
+/* About Section */
 .about-section {
     padding: 80px 20px;
     background-color: #2c2c2c;
@@ -95,6 +114,7 @@ body {
     color: #ddd;
 }
 
+/* Feature Section */
 .features {
     display: flex;
     justify-content: center;
@@ -126,6 +146,7 @@ body {
     color: #ccc;
 }
 
+/* Contact Section */
 .contact-section {
     padding: 60px 20px;
     background-color: #f9f9f9;
@@ -187,4 +208,83 @@ body {
 .social-icon i:hover {
     transform: scale(1.2);
     color: #0073b1;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .main-section h1 {
+        font-size: 36px;
+    }
+
+    .main-section p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #333;
+        padding: 20px 0;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .nav-links a {
+        margin: 10px 0;
+        padding: 10px 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: flex;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+
+    /* Hamburger open icon animation */
+    .hamburger.open div:nth-child(1) {
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px;
+    }
+
+    .hamburger.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+        transform: rotate(-45deg);
+        position: relative;
+        top: -5px;
+    }
+
+    .nav-links.open {
+        display: flex; /* Show the menu when the 'open' class is added */
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-bar {
+        padding: 10px;
+    }
+
+    .main-section h1 {
+        font-size: 24px;
+    }
+
+    .main-section p {
+        font-size: 14px;
+    }
 }

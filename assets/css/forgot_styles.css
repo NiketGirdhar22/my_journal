@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     background: url('images/image_bg.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -30,28 +30,29 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    padding: 30px;
-    width: 350px;
+    padding: 20px;
+    width: 90%;
+    max-width: 350px;
     text-align: center;
 }
 
 .forgot-password-box h2 {
     margin-bottom: 20px;
-    font-size: 26px;
+    font-size: 24px;
     color: #333;
     font-family: 'Poppins', sans-serif;
 }
 
 .forgot-password-box p {
-    margin-bottom: 25px;
-    font-size: 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
     color: #555;
     text-align: left;
     font-family: 'Poppins', sans-serif;
 }
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
@@ -75,10 +76,10 @@ body {
 .reset-button {
     background-color: #5A99D3;
     color: white;
-    padding: 12px 25px;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     width: 100%;
 }
@@ -88,8 +89,8 @@ body {
 }
 
 .links {
-    margin-top: 20px;
-    font-size: 15px;
+    margin-top: 15px;
+    font-size: 14px;
 }
 
 .links a {
@@ -99,4 +100,37 @@ body {
 
 .links a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .forgot-password-box h2 {
+        font-size: 20px;
+    }
+
+    .forgot-password-box p {
+        font-size: 12px;
+    }
+
+    .reset-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .forgot-password-container {
+        padding: 15px;
+    }
+
+    .forgot-password-box h2 {
+        font-size: 18px;
+    }
+
+    .forgot-password-box p {
+        font-size: 12px;
+    }
+
+    .reset-button {
+        font-size: 14px;
+    }
 }

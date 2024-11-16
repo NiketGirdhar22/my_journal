@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     background: url('images/image_bg.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -31,7 +31,8 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -62,7 +63,7 @@ body {
 }
 
 .login-button {
-    background-color: #4CAF50;
+    background-color: #5A99D3;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -70,7 +71,6 @@ body {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    background-color: #5A99D3;
 }
 
 .login-button:hover {
@@ -91,4 +91,58 @@ body {
 
 .links a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-box h2 {
+        font-size: 20px;
+    }
+
+    .input-group label {
+        font-size: 12px;
+    }
+
+    .input-group input {
+        font-size: 12px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .links {
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-box h2 {
+        font-size: 18px;
+    }
+
+    .input-group label {
+        font-size: 12px;
+    }
+
+    .input-group input {
+        font-size: 12px;
+    }
+
+    .login-button {
+        font-size: 14px;
+    }
+
+    .links {
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
