@@ -29,7 +29,7 @@
    ```
 
 2. **Open in Browser**:
-   Open `index.html` in your favorite browser to preview the website.
+   Open `index.html` to preview the website.
 
 3. **Customize**:
    - Edit the HTML, CSS, and JS files as needed to fit your requirements.
@@ -38,10 +38,10 @@
 ## File Structure 📂
 
 - `index.html`: Main landing page with informantion and user login/signup options.
-- `signup.html` : User registeration page.
-- `login.html`: User authentication page.
-- `forgot.html` : To generate the reset password link in case user wants to change password or forgets it.
-- `reset.html` : Reset password page.
+- `signup.php` : User registeration page.
+- `login.php`: User authentication page.
+- `forgot.php` : To generate the reset password link in case user wants to change password or forgets it.
+- `reset.php` : Reset password page.
 - `welcomeback.php`: User dashboard to write and view journals.
 
 ## Contributing 🤝
