@@ -1,20 +1,21 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 
 $username = $_SESSION['username'];
-$jsonFilePath = "assets/php/usrdata/{$username}.json";
+$userDir = "assets/usrdata/{$username}";
+$infoFilePath = "{$userDir}/info.json";
+$entriesFilePath = "{$userDir}/entries.json";
 
 $entries = [];
 $selectedEntry = null;
 
-if (file_exists($jsonFilePath)) {
-    $jsonData = file_get_contents($jsonFilePath);
-    $data = json_decode($jsonData, true);
-    $entries = $data['entries'] ?? [];
+if (is_dir($userDir) && file_exists($entriesFilePath)) {
+    $entriesData = file_get_contents($entriesFilePath);
+    $entries = json_decode($entriesData, true) ?: [];
 }
 
 if (isset($_GET['entry'])) {
@@ -24,6 +25,7 @@ if (isset($_GET['entry'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +41,10 @@ if (isset($_GET['entry'])) {
     <div class="nav-bar">
         <a href="#" class="nav-logo">MyJournal</a>
         <div class="nav-links">
-            <a href="assets/php/logout.php">Logout</a>
+            <a href="update_username.php">Change Username</a>
+            <a href="update_password.php">Change Password</a>
+            <a href="delete_account.php" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">Delete Account</a>
+            <a href="logout.php">Logout</a>
         </div>
     </div>
 
@@ -51,11 +56,10 @@ if (isset($_GET['entry'])) {
             <div class="entries-column">
                 <h2>Previous Entries</h2>
                 <ul class="entries-list">
-                    <?php if (count($entries) > 0): ?>
+                    <?php if (!empty($entries)): ?>
                         <?php foreach ($entries as $index => $entry): ?>
                             <li>
                                 <a href="?entry=<?php echo $index; ?>">
-                                    <strong><?php echo htmlspecialchars($entry['date']); ?></strong> - 
                                     <?php echo htmlspecialchars($entry['title']); ?>
                                 </a>
                             </li>
@@ -65,9 +69,8 @@ if (isset($_GET['entry'])) {
                     <?php endif; ?>
                 </ul>
             </div>
-
             <div class="entry-area">
-                <form action="assets/php/save_entry.php" method="POST">
+                <form action="save_entry.php" method="POST">
                     <input 
                         type="text" 
                         id="entryTitle" 
@@ -83,7 +86,14 @@ if (isset($_GET['entry'])) {
                         rows="15" 
                         required
                     ><?php echo htmlspecialchars($selectedEntry['content'] ?? ''); ?></textarea>
-                    <button type="submit">Submit Entry</button>
+                    
+                    <?php if ($selectedEntry): ?>
+                        <input type="hidden" name="entryIndex" value="<?php echo $entryIndex; ?>">
+                        <button type="submit" name="action" value="update">Update Entry</button>
+                        <button type="button" onclick="window.location.href='welcomeback.php'">Start New Entry</button>
+                    <?php else: ?>
+                        <button type="submit" name="action" value="save">Save Entry</button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>
