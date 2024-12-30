@@ -13,12 +13,14 @@ body {
     box-sizing: border-box;
 }
 
+
 .nav-bar {
     background-color: #333;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-logo {
@@ -39,6 +41,21 @@ body {
     margin: 0 15px;
     font-weight: 500;
 }
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.hamburger div {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+
 
 .main-section {
     padding: 40px;
@@ -139,21 +156,56 @@ button:hover {
 }
 
 @media (max-width: 1024px) {
+
     .nav-bar {
         flex-direction: column;
         align-items: flex-start;
-        padding: 20px;
     }
 
     .nav-links {
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
         width: 100%;
-        margin-top: 20px;
+        background-color: #333;
+        padding: 20px 0;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        z-index: 1000;
     }
 
     .nav-links a {
         margin: 10px 0;
+        padding: 10px 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: flex;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+
+    .hamburger.open div:nth-child(1) {
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px;
+    }
+
+    .hamburger.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+        transform: rotate(-45deg);
+        position: relative;
+        top: -5px;
+    }
+
+    .nav-links.open {
+        display: flex;
     }
 
     .journal-container {
@@ -176,6 +228,7 @@ button:hover {
         padding: 20px;
     }
 
+    
     .welcome-message h1 {
         font-size: 24px;
         margin-bottom: 20px;
@@ -189,42 +242,63 @@ button:hover {
         font-size: 16px;
         padding: 6px 10px;
     }
-}
 
-@media (max-width: 480px) {
-    .nav-logo {
-        font-size: 20px;
+    .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .nav-links {
         display: none;
-        width: 100%;
         flex-direction: column;
+        width: 100%;
         background-color: #333;
         padding: 20px 0;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        z-index: 1000;
     }
 
     .nav-links a {
         margin: 10px 0;
         padding: 10px 20px;
-        text-align: center;
         width: 100%;
+        text-align: center;
     }
 
     .hamburger {
-        display: block;
-        cursor: pointer;
-    }
-
-    .hamburger div {
-        width: 30px;
-        height: 4px;
-        background-color: #fff;
-        margin: 6px 0;
-    }
-
-    .hamburger.open + .nav-links {
         display: flex;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+
+    .hamburger.open div:nth-child(1) {
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px;
+    }
+
+    .hamburger.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+        transform: rotate(-45deg);
+        position: relative;
+        top: -5px;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .nav-bar {
+        font-size: 20px;
     }
 
     .journal-container {

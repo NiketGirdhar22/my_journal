@@ -25,7 +25,6 @@ if (isset($_GET['entry'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,15 +37,20 @@ if (isset($_GET['entry'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="nav-bar">
+    <nav class="nav-bar">
         <a href="#" class="nav-logo">MyJournal</a>
-        <div class="nav-links">
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="nav-links" id="nav-links">
             <a href="update_username.php">Change Username</a>
             <a href="update_password.php">Change Password</a>
             <a href="delete_account.php" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">Delete Account</a>
             <a href="logout.php">Logout</a>
         </div>
-    </div>
+    </nav>
 
     <div class="main-section">
         <div class="welcome-message">
@@ -98,5 +102,12 @@ if (isset($_GET['entry'])) {
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('open');
+            this.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>
