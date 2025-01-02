@@ -95,6 +95,7 @@ if (isset($_GET['entry'])) {
                         <input type="hidden" name="entryIndex" value="<?php echo $entryIndex; ?>">
                         <button type="submit" name="action" value="update">Update Entry</button>
                         <button type="button" onclick="window.location.href='welcomeback.php'">Start New Entry</button>
+                        <button type="submit" name="action" value="delete" onclick="return confirm('Are you sure you want to delete this entry? This action cannot be undone.');">Delete Entry</button>
                     <?php else: ?>
                         <button type="submit" name="action" value="save">Save Entry</button>
                     <?php endif; ?>

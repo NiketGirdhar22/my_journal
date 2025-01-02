@@ -56,30 +56,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>MyJournal - Reset Password</title>
+    <link rel="stylesheet" href="assets/css/reset_styles.css">
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="reset-container">
+        <div class="reset-box">
+            <h2>Reset Your Password</h2>
+            <form method="POST">
+                <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
+                <input type="hidden" name="username" value="<?php echo htmlspecialchars($_GET['username']); ?>">
 
-    <form method="POST">
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
-        <input type="hidden" name="username" value="<?php echo htmlspecialchars($_GET['username']); ?>">
-    
-        <label for="new_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required>
-    
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
-    
-        <button type="submit">Reset Password</button>
-    </form>
+                <div class="input-group">
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+
+                <button type="submit" class="reset-button">Reset Password</button>
+
+                <div class="links">
+                    <a href="login.php">Back to Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
