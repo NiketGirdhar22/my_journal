@@ -4,19 +4,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
     $confirm_password = htmlspecialchars(trim($_POST['confirm-password']));
+    
     if ($password !== $confirm_password) {
         die("<script type='text/javascript'>
                 alert('Passwords do not match!');
                 window.history.back();
               </script>");
     }
+
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    $encryptionKey = bin2hex(openssl_random_pseudo_bytes(32));
+
     $dir = "assets/usrdata";
     if (!is_dir($dir)) {
         if (!mkdir($dir, 0777, true)) {
             die("Failed to create directory: " . $dir);
         }
     }
+
     $user_dir = $dir . "/" . $user;
     if (is_dir($user_dir)) {
         die("<script type='text/javascript'>
@@ -24,20 +30,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.history.back();
               </script>");
     }
+
     if (!mkdir($user_dir, 0777, true)) {
         die("<script type='text/javascript'>
                 alert('Failed to create user folder.');
                 window.history.back();
               </script>");
     }
+
     $info_data = array(
         "username" => $user,
         "email" => $email,
         "password" => $hashed_password,
+        "encryptionKey" => $encryptionKey,
         "reset_token" => null,
         "update_username" => null,
         "update_password" => null
     );
+
     $info_json = json_encode($info_data, JSON_PRETTY_PRINT);
     $info_file = $user_dir . "/info.json";
     if (file_put_contents($info_file, $info_json) === false) {
@@ -46,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.history.back();
               </script>");
     }
+
     $entries_data = array();
     $entries_json = json_encode($entries_data, JSON_PRETTY_PRINT);
     $entries_file = $user_dir . "/entries.json";
@@ -55,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.history.back();
               </script>");
     }
+
     echo "<script type='text/javascript'>
             alert('Account successfully created!');
             window.location.href = 'login.php';

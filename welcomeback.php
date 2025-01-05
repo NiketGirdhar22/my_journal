@@ -10,21 +10,56 @@ $userDir = "assets/usrdata/{$username}";
 $infoFilePath = "{$userDir}/info.json";
 $entriesFilePath = "{$userDir}/entries.json";
 
+// Initialize entries array and selected entry variable
 $entries = [];
 $selectedEntry = null;
 
+// Check if info.json exists to retrieve the encryption key
+if (!file_exists($infoFilePath)) {
+    die("Info file (info.json) does not exist.");
+}
+
+$infoData = json_decode(file_get_contents($infoFilePath), true);
+if (!isset($infoData['encryptionKey'])) {
+    die("Encryption key is missing in info.json.");
+}
+
+$encryptionKey = $infoData['encryptionKey'];  // Retrieve encryption key from info.json
+$encryptionMethod = 'AES-256-CBC';  // The encryption method used
+
+// Function to decrypt data
+function decrypt($data, $key, $method) {
+    list($encryptedData, $iv) = explode('::', base64_decode($data), 2);
+    return openssl_decrypt($encryptedData, $method, $key, 0, $iv);
+}
+
+// Function to encrypt data
+function encrypt($data, $key, $method) {
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($method)); // Generate a random IV
+    $encryptedData = openssl_encrypt($data, $method, $key, 0, $iv);
+    // Return the encrypted data with the IV (base64 encoded)
+    return base64_encode($encryptedData . '::' . $iv);
+}
+
+// Load and decrypt entries if entries file exists
 if (is_dir($userDir) && file_exists($entriesFilePath)) {
     $entriesData = file_get_contents($entriesFilePath);
     $entries = json_decode($entriesData, true) ?: [];
 }
 
+// If an entry index is passed via GET, fetch and decrypt the selected entry
 if (isset($_GET['entry'])) {
     $entryIndex = (int) $_GET['entry'];
     if (isset($entries[$entryIndex])) {
         $selectedEntry = $entries[$entryIndex];
+
+        // Decrypt title and content before displaying
+        $selectedEntry['title'] = decrypt($selectedEntry['title'], $encryptionKey, $encryptionMethod);
+        $selectedEntry['content'] = decrypt($selectedEntry['content'], $encryptionKey, $encryptionMethod);
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +99,11 @@ if (isset($_GET['entry'])) {
                         <?php foreach ($entries as $index => $entry): ?>
                             <li>
                                 <a href="?entry=<?php echo $index; ?>">
-                                    <?php echo htmlspecialchars($entry['title']); ?>
+                                    <?php 
+                                    // Decrypt the title for display in the entries list
+                                    $decryptedTitle = decrypt($entry['title'], $encryptionKey, $encryptionMethod);
+                                    echo htmlspecialchars($decryptedTitle); 
+                                    ?>
                                 </a>
                             </li>
                         <?php endforeach; ?>
